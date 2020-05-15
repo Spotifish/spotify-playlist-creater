@@ -1,0 +1,25 @@
+{
+  "name": "spotify-playlist-creater",
+  "version": "0.0.1",
+  "description": "Creates Spotify Playlist by building via configurable clusters",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Frranz/spotify-playlist-creater.git"
+  },
+  "author": "Franz Bubel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Frranz/spotify-playlist-creater/issues"
+  },
+  "homepage": "https://github.com/Frranz/spotify-playlist-creater#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "node-fetch": "^2.6.0",
+    "readline": "^1.3.0",
+    "url": "^0.11.0"
+  }
+}
