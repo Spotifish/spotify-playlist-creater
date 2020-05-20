@@ -12,6 +12,12 @@ export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  inject: {
+    dao: 'dao'
+  },
+  created() {
+    console.log(this.dao.playlistRepository.getPlaylistsForUserId("baum!"));
   }
 }
 </script>
