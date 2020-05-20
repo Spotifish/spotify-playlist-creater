@@ -3,6 +3,8 @@ import App from './App.vue'
 
 Vue.config.productionTip = false
 
+import "./static/sanitize.css"
+
 new Vue({
   render: h => h(App),
 }).$mount('#app')
