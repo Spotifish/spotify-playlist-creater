@@ -1,4 +1,5 @@
 # todo
+- get user tracks weitermachen bei get access token
 - allow multiple artists per song
 - confirm db datatype correctness / change limits
 - Frontend

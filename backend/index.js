@@ -15,19 +15,4 @@ app.listen(PORT,() => {
     console.log(`express - listening to port ${PORT}`);
 })
 
-app.get('/analyzeSavedTracks',(req,res) => {
-
-    res.send();
-});
-
-setTimeout(async  () => {
-    try {
-        await spotify.getSavedTracks();
-    } catch(e) {
-        console.error(e);
-    }
-},1);
-
-async function main() {
-
-}
+app.post('/proxy',ProxyController.request);
