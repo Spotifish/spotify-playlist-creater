@@ -5,7 +5,8 @@ class ProxyController{
     async static request(req,res) {
         const cookie = req.cookies;
         const {url,body,method} = req.body;
-        await proxyService.request(url,body,method,cookie);
+        const response = await proxyService.request(url,body,method,cookie);
+        res.send(response);
     }
 }
 

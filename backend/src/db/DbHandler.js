@@ -24,13 +24,14 @@ class DbHandler{
         let conn;
         try {
             conn = await this.db.getConnection();
-            const storeAuth = await conn.query('SELECT authCode FROM userAuth WHERE cookie=?',[cookie]);
+            const storeAuth = await conn.query('SELECT code,accessToken FROM userAuth WHERE cookie=?',[cookie]);
             if (storeAuth.length === 0) {
                 throw new Error('DbHandler - Error when storing UserAuth');
             }
             return {
-                bearer:storeAuth[0],
-                error:null
+                authCode:storeAuth[0].authCode,
+                accessToken: storeAuth[0].authCode,
+                error:null,
             };
         } catch(e) {
             console.error(e);

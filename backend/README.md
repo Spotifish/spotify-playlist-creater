@@ -15,8 +15,12 @@ Creates Spotify Playlist by building via configurable clusters
         body: <JSON for Request Body>
     }
 
-Returns Answer as sent from Spotify API<br>429 is handled by Server
+**Returns**
 
+    {
+        error: <Error message from server if request could not be fullfilled>,
+        response: <Spotifies API response>
+    }
 
 
 ## Get Filtered Songs
