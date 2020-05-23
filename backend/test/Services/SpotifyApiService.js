@@ -24,12 +24,9 @@ describe('SpotifyApiService', async () => {
     describe('Get Saved Tracks', () => {
         it('works on happy path', async () => {
             apiService = new ApiService();
-            const tracks = await apiService.getUsersTracks('/v1/me/tracks',null,COOKIE);
+            await apiService.refreshBearer();
+            const tracks = await apiService.getUsersTracks('/v1/me/tracks',COOKIE);
             Assert.equal(tracks.error,null);
         })
     });
-
-
-
-
 });

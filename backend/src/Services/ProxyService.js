@@ -9,7 +9,7 @@ class ProxyService {
 
         switch(true) {
             case /\/v1\/me\/tracks/.test(url):
-                return await this.spotifyApiService.getUsersTracks(url,body,cookie);
+                return await this.spotifyApiService.getUsersTracks(url,cookie);
                 break;
             default:
                 return {

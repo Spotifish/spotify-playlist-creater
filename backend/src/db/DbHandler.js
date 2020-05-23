@@ -26,11 +26,11 @@ class DbHandler{
             conn = await this.db.getConnection();
             const storeAuth = await conn.query('SELECT code,accessToken FROM userAuth WHERE cookie=?',[cookie]);
             if (storeAuth.length === 0) {
-                throw new Error('DbHandler - Error when storing UserAuth');
+                throw new Error(`DbHandler - No userAuth found in db for cookie ${cookie}`);
             }
             return {
-                authCode:storeAuth[0].authCode,
-                accessToken: storeAuth[0].authCode,
+                authCode:storeAuth[0].code,
+                accessToken: storeAuth[0].accessToken,
                 error:null,
             };
         } catch(e) {

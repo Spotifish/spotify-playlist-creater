@@ -17,16 +17,19 @@ class SpotifyApiService{
         return await this.dbHandler.storeUserAuth(authCode,cookie);
     }
 
-    async getUsersTracks(url,body,cookie) {
+    async getUsersTracks(url,cookie) {
         url = API_BASE_URL + url;
         const getAuthCode = await this.dbHandler.getAuthCode(cookie);
         if (getAuthCode.error !== null) {
+            console.error('SpotifyApiService - AuthCode not found in db');
             return {error:getAuthCode.error};
         }
 
         // get accessToken either from db or request new one
         let accessToken;
         if (getAuthCode.accessToken === null) {
+            console.log('SpotifyApiService - Access Token not found in DB, requesting from Spotify API');
+
             // set body params
             const bodyParams = new URLSearchParams();
             bodyParams.append('code',getAuthCode.authCode);
@@ -34,21 +37,28 @@ class SpotifyApiService{
             bodyParams.append('redirect_uri', 'https://example.com/callback');
 
             const headers = {'Authorization': `Basic ${process.env.BASIC}`};
-            const getAccessToken = await this.queueApiRequest(API_BASE_URL + '/api/token','GET',bodyParams,headers);
+            const getAccessToken = await this.queueApiRequest('https://accounts.spotify.com/api/token','POST',bodyParams,headers);
             if(getAccessToken.status !== 200) {
+                const response = await getAccessToken.text();
+                console.error(`Got Response: ${response}`);
                 console.error(`SpotifyApiService - Received status ${getAccessToken.status} when requesting access token from API`);
                 return {error: 'SpotifyApiService - Could not retrieve access token from spotify API'};
             }
 
             const accessTokenJson = await getAccessToken.json()
-            accessToken = accessTokenJson.acccess_token;
+            accessToken = accessTokenJson.access_token;
         } else {
+            console.log('SpotifyApiService - Access Token found in DB');
             accessToken = getAuthCode.accessToken;
         }
 
-        const getUsersTracks = await this.queueApiRequest(url,'GET',body,{'authorization': `Bearer ${accessToken}`});
+        console.log(`Access Token: ${accessToken}`);
+
+        const getUsersTracks = await this.queueApiRequest(url,'GET',null,{'authorization': `Bearer ${accessToken}`});
         if (getUsersTracks.status !== 200) {
-            console.error(`SpotifyApiService - Received status ${getUsersTracks.status} when requesting access token from API`);
+            const response = await getUsersTracks.text();
+            console.error(`Got Response: ${response}`);
+            console.error(`SpotifyApiService - Received status ${getUsersTracks.status} when requesting user tracks from API`);
             return {error: 'SpotifyApiService - Could not retrieve saved tracks from spotify API'};
         }
 
@@ -56,12 +66,16 @@ class SpotifyApiService{
     }
 
     async queueApiRequest(url,method,body,headers) {
+        console.log(`APIQueue - Sending ${method} to ${url}`);
         return await this.queue.add(async () => {
-            const sendReq = await fetch(url,{
+            const options = {
                 method,
                 body,
                 headers,
-            });
+            };
+            if (method==='GET') {delete options.body};
+
+            const sendReq = await fetch(url,options);
             if (sendReq.status === 429) {
                 // do timeout for queue
             }
