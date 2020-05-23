@@ -1,24 +1,7 @@
-# frontend
+# Frontend for Spoti.fish
 
-## Project setup
-```
-npm install
-```
+## Development hints
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+- When the spotify api mode is set to "development" [e.g. here](./.env.development) the [Spotify App Authorization Key](https://developer.spotify.com/documentation/general/guides/authorization-guide/)
+can be set using another .env file (preferably a local env file that won't be commited) using the key `VUE_APP_SPOTIFY_API_KEY`.
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
