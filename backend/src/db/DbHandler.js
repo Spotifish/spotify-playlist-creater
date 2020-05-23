@@ -3,6 +3,21 @@ class DbHandler{
         this.db = require('./db');
     }
 
+    // need for testing (maybe for automatic expiring?)
+    async deleteCookie(cookie) {
+        let conn;
+        try {
+            conn = await this.db.getConnection();
+            const storeAuth = await conn.query('DELETE FROM userAuth WHERE cookie=?',[cookie]);
+            return {error:null};
+        } catch(e) {
+            console.error(e);
+            return {error:'DbHandler - Error deleting cookie'};
+        } finally{
+            if (conn) conn.release();
+        }
+    }
+
     async storeUserAuth (userAuth,cookie) {
         let conn;
         try {

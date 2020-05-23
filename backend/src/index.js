@@ -1,12 +1,11 @@
 if (process.env.EXEC_MODE !== "PROD") {
     console.log('loading enviroment variables from .env because EXEC_MODE!=="PROD"')
-    require('dotenv').config({path:__dirname+'/.env'});
+    require('dotenv').config({path:__dirname+'/./../.env'});
 }
 
-const DbHandler = require('./db/DbHandler');
-const SpotifyHandler = require('./spotify/SpotifyHandler');
-const spotify = new SpotifyHandler(new DbHandler());
 const express = require('express');
+
+const SpotifyController = require('./Controllers/SpotifyController');
 
 const PORT = process.env.PORT;
 
@@ -15,4 +14,6 @@ app.listen(PORT,() => {
     console.log(`express - listening to port ${PORT}`);
 })
 
-app.post('/proxy',ProxyController.request);
+app.use(express.json());
+app.post('/proxy',SpotifyController.request);
+app.post('/auth',SpotifyController.storeAuth);

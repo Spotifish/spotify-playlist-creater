@@ -13,6 +13,19 @@ class SpotifyApiService{
         console.log('SpotifApiService Instanciated');
     }
 
+    async request(url,body,method,cookie) {
+
+        switch(true) {
+            case /\/v1\/me\/tracks/.test(url):
+                return await this.getUsersTracks(url,cookie);
+                break;
+            default:
+                return {
+                    error: 'sent url not (yet) supported '
+                };
+        }
+    }
+
     async storeUserAuth(authCode,cookie) {
         return await this.dbHandler.storeUserAuth(authCode,cookie);
     }
@@ -62,7 +75,7 @@ class SpotifyApiService{
             return {error: 'SpotifyApiService - Could not retrieve saved tracks from spotify API'};
         }
 
-        return {error:null,response:getUsersTracks};
+        return {error:null,response:await getUsersTracks.json()};
     }
 
     async queueApiRequest(url,method,body,headers) {
