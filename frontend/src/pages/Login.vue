@@ -1,17 +1,24 @@
 <template>
   <div id="login-page">
     <div id="container">
-      <h1>Spotifish</h1>
-      <img id="logo" src="https://placeholder.pics/svg/300" alt="Spotifish Icon">
-      <button id="btn-login" class="ripple">Login with Spotify</button>
+      <h1>Spoti.fish</h1>
+      <img id="logo" src="https://placeholder.pics/svg/300" alt="Spoti.fish Icon">
+      <button id="btn-login" class="ripple" v-on:click="login">Login with Spotify</button>
     </div>
   </div>
 </template>
 
 <script>
-    export default {
-        name: "LoginPage"
+  import spotifyDao from "../data/spotifyDao";
+
+  export default {
+    name: "LoginPage",
+    methods: {
+      login: async function () {
+        await spotifyDao("/", {})
+      }
     }
+  }
 </script>
 
 <style scoped lang="scss">

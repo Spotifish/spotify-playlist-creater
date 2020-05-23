@@ -6,10 +6,7 @@
 
 <script>
   export default {
-    name: 'App',
-    inject: {
-      dao: 'dao'
-    }
+    name: 'App'
   }
 </script>
 
