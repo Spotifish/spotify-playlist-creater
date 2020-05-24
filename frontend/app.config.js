@@ -13,7 +13,9 @@ const config = {
       clientId: process.env.VUE_APP_SPOTIFY_API_CLIENT_ID,
       clientSecret: process.env.VUE_APP_SPOTIFY_API_CLIENT_SECRET
     },
-    forceDialog: false
+    forceDialog: false,
+    isSaveTokensEnabled: process.env.VUE_APP_SPOTIFY_API_SAVE_TOKENS || true,
+    redirectUrl: process.env.VUE_APP_SPOTIFY_REDIRECT_URL
   },
   baseUrl: process.env.BASE_URL
 }
@@ -42,6 +44,10 @@ if (spotifyApi.mode === spotifyApi.modes.DEV) {
 
 if (process.env.VUE_APP_SPOTIFY_API_FORCE_DIALOG !== undefined) {
   spotifyApi.forceDialog = JSON.parse(process.env.VUE_APP_SPOTIFY_API_FORCE_DIALOG.toLowerCase());
+}
+
+if (spotifyApi.redirectUrl === undefined) {
+  console.error("No redirect url specified!")
 }
 
 export default config;

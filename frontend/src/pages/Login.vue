@@ -9,13 +9,14 @@
 </template>
 
 <script>
-  import spotifyDao from "../data/spotifyDao";
+  import repositories from "../data/spotify/repositories";
+  import config from "../../app.config";
 
   export default {
     name: "LoginPage",
     methods: {
       login: async function () {
-        await spotifyDao("/", {})
+        await repositories.authRepository.requestAuthorizationToken(config.spotifyApi.redirectUrl, "/")
       }
     }
   }
