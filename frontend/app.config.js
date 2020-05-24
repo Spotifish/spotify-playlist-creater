@@ -14,7 +14,7 @@ const config = {
       clientSecret: process.env.VUE_APP_SPOTIFY_API_CLIENT_SECRET
     },
     forceDialog: false,
-    isSaveTokensEnabled: process.env.VUE_APP_SPOTIFY_API_SAVE_TOKENS || true,
+    isSaveTokensEnabled: process.env.VUE_APP_SPOTIFY_API_SAVE_TOKENS.toLowerCase() === 'true',
     redirectUrl: process.env.VUE_APP_SPOTIFY_REDIRECT_URL
   },
   baseUrl: process.env.BASE_URL

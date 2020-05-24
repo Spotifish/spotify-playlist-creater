@@ -1,27 +1,45 @@
 <template>
   <div id="login-return">
-    <h2>Waiting for login to finish...</h2>
-    <span>{{$store.getters.isAuthenticated}}</span>
+    <template v-if="!$store.getters.isAuthenticated && isSuccess">
+      <Spinner ></Spinner>
+      <h2>Authenticating...</h2>
+    </template>
+    <template v-else-if="!isSuccess">
+      <h2>Authentication failed!</h2>
+      <button v-on:click="$router.push('/')">Return to home</button>
+    </template>
   </div>
 </template>
 
 <script>
+  import Spinner from "../components/Spinner";
   import repositories from "../data/spotify/repositories";
   import config from "../../app.config";
 
   export default {
     name: "LoginReturn",
+    data: function () {
+      return {
+        isSuccess: true
+      }
+    },
+    components: {
+      Spinner
+    },
     async created() {
+      if (this.$store.getters.isAuthenticated) {
+        await this.$router.push('/');
+      }
+
       const queryParams = this.$route.query;
       const state = queryParams.state;
 
       if (queryParams.error || (queryParams.error == null && queryParams.code == null)) {
-        //await this.$router.push('/login');
-        return
+        this.isSuccess = false;
+        return;
       }
 
       const authorizationToken = queryParams.code;
-
       const authData = await repositories.authRepository.requestAccessToken(config.spotifyApi.redirectUrl, authorizationToken);
 
       this.$store.commit('setSpotifyAccessToken', {
@@ -38,6 +56,19 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  #login-return {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
+    h2 {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+  }
 </style>

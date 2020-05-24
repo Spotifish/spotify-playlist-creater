@@ -21,6 +21,13 @@ export default new Vuex.Store({
 
       state.spotifyAccessToken = auth.accessToken;
       state.spotifyTokenExpiration = auth.expirationDate;
+    },
+    invalidateSpotifyAccessToken(state) {
+      localStorage.removeItem(SPOTIFY_ACCESS_TOKEN);
+      localStorage.removeItem(SPOTIFY_TOKEN_EXPIRY);
+
+      state.spotifyAccessToken = null;
+      state.spotifyTokenExpiration = null;
     }
   },
   actions: {

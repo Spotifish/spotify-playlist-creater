@@ -4,21 +4,30 @@
   margin: 0;
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
+
+  &:before, &:after {
+    box-sizing: inherit;
+  }
 }
 
 html, body {
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 button {
   border: none;
-  font-size: 16px;
+  font-size: 1.3rem;
+  font-weight: bold;
   cursor: pointer;
   background-color: $color-accent;
   outline: none;
   background-position: center;
   transition: background 0.8s;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
   @include box_shadow(2);
 
   &:hover {
