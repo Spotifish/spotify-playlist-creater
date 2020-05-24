@@ -15,8 +15,8 @@
       const queryParams = this.$route.query;
       const state = queryParams.state;
 
-      if (queryParams.error) {
-        await this.$router.push('/login');
+      if (queryParams.error || (queryParams.error == null && queryParams.code == null)) {
+        //await this.$router.push('/login');
         return
       }
 

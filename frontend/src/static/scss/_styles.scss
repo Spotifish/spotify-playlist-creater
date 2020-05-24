@@ -1,0 +1,33 @@
+* {
+  color: white;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+}
+
+button {
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: $color-accent;
+  outline: none;
+  background-position: center;
+  transition: background 0.8s;
+  @include box_shadow(2);
+
+  &:hover {
+    background: lighten($color-accent, 7%) radial-gradient(circle, transparent 1%, lighten($color-accent, 7%) 1%) center/15000%;
+  }
+
+  &:active {
+    background-color: lighten($color-accent, 20%);
+    background-size: 100%;
+    transition: background 0s;
+  }
+}

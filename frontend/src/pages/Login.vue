@@ -3,7 +3,7 @@
     <div id="container">
       <h1>Spoti.fish</h1>
       <img id="logo" src="https://placeholder.pics/svg/300" alt="Spoti.fish Icon">
-      <button id="btn-login" class="ripple" v-on:click="login">Login with Spotify</button>
+      <button id="btn-login" v-on:click="login">Login with Spotify</button>
     </div>
   </div>
 </template>
@@ -43,10 +43,9 @@
       button {
         font-size: 2rem;
         height: 3.5rem;
-        border-radius: 15px;
+        border-radius: 10px;
         margin-top: 30px;
         width: 99%;
-        @include box_shadow(3);
       }
 
       img {
