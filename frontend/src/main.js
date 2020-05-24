@@ -13,11 +13,11 @@ import store from "./store"
 
 // Routes
 import Login from "./pages/Login";
-import Start from "./pages/Start";
+import Playlists from "./pages/Playlists";
 import LoginCallback from "./pages/LoginCallback";
 
 const routes = [
-  {path: '/', component: Start, name: 'start'},
+  {path: '/', component: Playlists, name: 'playlists'},
   {path: '/login', component: Login, name: 'login'},
   {path: '/authCallback', component: LoginCallback, name: 'authCallback'}
 ];

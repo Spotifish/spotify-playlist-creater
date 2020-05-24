@@ -1,12 +1,14 @@
 <template>
   <div id="login-return">
     <template v-if="!$store.getters.isAuthenticated && isSuccess">
-      <Spinner ></Spinner>
+      <Spinner></Spinner>
       <h2>Authenticating...</h2>
     </template>
     <template v-else-if="!isSuccess">
       <h2>Authentication failed!</h2>
-      <button v-on:click="$router.push('/')">Return to home</button>
+      <router-link to="/">
+        <button v-on:click="$router.push('/')">Return to home</button>
+      </router-link>
     </template>
   </div>
 </template>

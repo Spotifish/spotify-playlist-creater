@@ -10,7 +10,8 @@ const SPOTIFY_TOKEN_EXPIRY = 'spotifyTokenExpiry';
 export default new Vuex.Store({
   state: {
     spotifyAccessToken: localStorage.getItem(SPOTIFY_ACCESS_TOKEN),
-    spotifyTokenExpiration: localStorage.getItem(SPOTIFY_TOKEN_EXPIRY)
+    spotifyTokenExpiration: localStorage.getItem(SPOTIFY_TOKEN_EXPIRY),
+    isLoading: false
   },
   mutations: {
     setSpotifyAccessToken(state, auth) {
@@ -28,6 +29,12 @@ export default new Vuex.Store({
 
       state.spotifyAccessToken = null;
       state.spotifyTokenExpiration = null;
+    },
+    startLoading(state) {
+      state.isLoading = true
+    },
+    finishLoading(state) {
+      state.isLoading = false
     }
   },
   actions: {
@@ -35,6 +42,7 @@ export default new Vuex.Store({
   getters: {
     spotifyAccessToken: state => state.spotifyAccessToken,
     spotifyTokenExpiry: state => state.spotifyTokenExpiration,
-    isAuthenticated: state => state.spotifyAccessToken != null && state.spotifyTokenExpiration > new Date().getTime()
+    isAuthenticated: state => state.spotifyAccessToken != null && state.spotifyTokenExpiration > new Date().getTime(),
+    isLoading: state => state.isLoading
   }
 });

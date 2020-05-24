@@ -1,6 +1,6 @@
 import spotifyDao from "../spotifyDao";
 
-const basePath = "/playlists";
+const basePath = "/me/playlists";
 
 /**
  * Retrieves the currently authenticated users playlists

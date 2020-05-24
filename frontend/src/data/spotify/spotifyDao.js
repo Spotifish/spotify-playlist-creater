@@ -8,6 +8,9 @@ import store from "../../store"
  * @return {Promise<Object>} resolves when a response has been received
  */
 export default async (url, params) => {
+  if (params.headers === undefined) {
+    params.headers = {};
+  }
   params.headers['Authorization'] = "Bearer " + store.getters.spotifyAccessToken;
   const response = await fetch(config.spotifyApi.baseUrl + url, params)
   if (response.status === 401) {
