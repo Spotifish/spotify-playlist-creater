@@ -15,9 +15,11 @@ import store from "./store"
 import Login from "./pages/Login";
 import LoginCallback from "./pages/LoginCallback";
 import PlaylistCreator from "./pages/PlaylistCreator";
+import Playlists from "./pages/Playlists";
 
 const routes = [
-  {path: '/', component: PlaylistCreator, name: 'start'},
+  {path: '/', component: Playlists, name: 'start'},
+  {path: '/playlistCreator', component: PlaylistCreator, name: 'creator'},
   {path: '/login', component: Login, name: 'login'},
   {path: '/authCallback', component: LoginCallback, name: 'authCallback'}
 ];
