@@ -26,7 +26,7 @@ button {
   outline: none;
   background-position: center;
   transition: background 0.8s;
-  border-radius: 8px;
+  border-radius: $border-radius;
   padding: 0.5rem 1rem;
   @include box_shadow(2);
 

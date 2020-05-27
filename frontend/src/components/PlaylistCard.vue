@@ -26,7 +26,7 @@
     background: white;
     margin: $page-margin $page-margin 0;
     padding: 10px;
-    border-radius: 15px;
+    border-radius: $border-radius;
     @include box_shadow(2);
 
     &:last-child {
@@ -38,6 +38,7 @@
       max-width: 400px;
       grid-column: 1 / 1;
       grid-row: 1 / 3;
+      border-radius: $border-radius;
     }
 
     $tex-size-span: 1.2rem;
