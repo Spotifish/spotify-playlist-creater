@@ -1,7 +1,6 @@
 const fetch = require('node-fetch');
 const Queue = require('queue');
 const {default: PQueue} = require('p-queue');
-const DbHandler = require('../db/DbHandler');
 const { URLSearchParams }   = require('url');
 
 const API_BASE_URL = 'https://api.spotify.com';
@@ -9,26 +8,20 @@ const API_BASE_URL = 'https://api.spotify.com';
 class SpotifyApiService{
     constructor() {
         this.queue = new PQueue();
-        this.dbHandler = new DbHandler();
         console.log('SpotifApiService Instanciated');
     }
 
     async request(href,body,method,headers,cookie) {
-        url = new URL(href);
+        const url = new URL(href);
         if (!/(spotify.com)$/.test(url.host)) {
             return {error: 'Proxy only allows URL\'s that end with spotify.com in hostname'};
         }
 
         switch(true) {
             case url.href==="https://accounts.spotify.com/api/token":
-                const basicHeader = {'Authorization': `Basic ${process.env.BASIC}`};
-                return await this.queueApiRequest(url,method,body,basicHeader);
+                headers['Authorization'] = `Basic ${process.env.BASIC}`
+                return await this.queueApiRequest(url.href,method,body,headers);
                 break;
-            case url.href==="https://api.spotify.com/v1/audio-features":
-                const bearerHeader = {'Authorization': `Bearer ${await this.getBearer()}`};
-                return await this.queueApiRequest(url.href,method,body,bearerHeader);
-                break;
-            break;
             default:
                 return await this.queueApiRequest(url.href,method,body,headers);
                 break;
@@ -49,7 +42,16 @@ class SpotifyApiService{
             if (sendReq.status === 429) {
                 // do timeout for queue
             }
-            return sendReq;
+
+            let error = null;
+            let response = null;
+            if (sendReq.status === 200) {
+                response = await sendReq.json();
+            } else if (sendReq.status !== 204 ) {
+                error = `Spotify API returned status ${sendReq.status}`
+            }
+
+            return {error,response};
         });
     }
 

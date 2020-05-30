@@ -10,8 +10,7 @@ const rl                    = readline.createInterface({
 
 class SpotifyHandler{
 
-    constructor(dbHandler) {
-        this.dbHandler = dbHandler;
+    constructor() {
         console.log('Initialized spotify handler');
     }
     async getSavedTracks() {
