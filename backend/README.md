@@ -24,22 +24,3 @@ Creates Spotify Playlist by building via configurable clusters
         error: <Error message from server if request could not be fullfilled; else null>,
         response: <Spotifies API response>
     }
-
-
-## Auth
-
-Send Authcode from Spotify Authenticate to this endpoint
-
-**URL:** /auth
-
-**Method:** POST
-
-**Query Paramters:**
-
--authCode
-
-**Returns**
-
-    {
-        error: <Error message from server if request could not be fullfilled; else null>,
-    }
