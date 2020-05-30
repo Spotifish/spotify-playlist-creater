@@ -3,6 +3,8 @@ Creates Spotify Playlist by building via configurable clusters
 
 # API Spoxyfoxy
 
+## Proxy
+
 **URL:** /proxy
 
 **Method:** POST
@@ -10,108 +12,34 @@ Creates Spotify Playlist by building via configurable clusters
 **Body:**
 
     {
-        url: <URL for Spotify API without https://api.spotify.com >,
-        method: <GET/POST/PUT>
-        body: <JSON for Request Body>
+        url: <URL for Spotify API has to contain spotify.com as host>,
+        method: <GET/POST/PUT>,
+        headers: <JSON with key-value pairs>,
+        body: <Body whatever format is needed>,
     }
 
 **Returns**
 
     {
-        error: <Error message from server if request could not be fullfilled>,
+        error: <Error message from server if request could not be fullfilled; else null>,
         response: <Spotifies API response>
     }
 
 
-## Get Filtered Songs
+## Auth
 
-**Method:** GET
+Send Authcode from Spotify Authenticate to this endpoint
 
-**URI:** `/api/v1/filteredSongs`
+**URL:** /auth
 
-#### Query Parameters:
+**Method:** POST
 
-Tracks will be sorted by _some parameter_ (maybe date added or smth), with offset and length it's possible to get chunks of tracks to not overforder the client
+**Query Paramters:**
 
-**Offset**
+-authCode
 
-Offset of returned tracks
-
-**Amount**
-
-Amount of returned Tracks
-
-**Playlist Sources:**
-
-playlists=\<playlistId1\>,\<playlistId2\>
-
-_Remark: Users Saved Tracks have ID 0_
-
-**Filter Parameters:**
-Use f_\<filterAttribute\>=\<lowerBound\>,\<upperBound\><br>
-
-Possible filterAttributes:
-- acusticness
-- dancability
-- duration_ms
-- energy
-- instrumentalness
-- key
-- liveness
-- loudness
-- mode
-- speechiness
-- temp
-- time_signature
-- valence
-
-For further reference see [Spotify API Documentation](https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/)
-
-**Example Request:**
-
-GET `/api/v1/filteredSongs?f_acusticness=3,10&f_dancability=4,5&playlists=0,7c6jzlubbx,xcrpqskrc4&jwt=9h873nqwo5niekrvthd7`
-
-**Return example:**
+**Returns**
 
     {
-        'totalTracks': 2,
-        'tracks': [
-            'title': 'Vegan Duck for Breakfast',
-            'artist': 'yunggoth✰',
-            'id': '35365gws',
-            'features': {
-                'danceability': 0.808,
-                'energy': 0.626,
-                'key': 7,
-                'loudness': -12.733,
-                'mode': 1,
-                'speechiness': 0.168,
-                'acousticness': 0.00187,
-                'instrumentalness': 0.159,
-                'liveness': 0.376,
-                'valence': 0.369,
-                'tempo': 123.99,
-                "duration_ms": 535223,
-                "time_signature": 4
-            }
-        ],[
-            'title': 'Flasche Luft',
-            'artist': 'BHZ',
-            'id': 'f43l4as',
-            'features': {
-                'danceability': 0.808,
-                'energy': 0.626,
-                'key': 7,
-                'loudness': -12.733,
-                'mode': 1,
-                'speechiness': 0.168,
-                'acousticness': 0.00187,
-                'instrumentalness': 0.159,
-                'liveness': 0.376,
-                'valence': 0.369,
-                'tempo': 123.99,
-                "duration_ms": 535223,
-                "time_signature": 4
-            }
-        ]
+        error: <Error message from server if request could not be fullfilled; else null>,
     }

@@ -7,8 +7,8 @@ class SpotifyController{
     }
     static async request(req,res,next) {
         const cookie = req.headers.cookie;
-        const {url,body,method} = req.body;
-        const response = await spotifyService.request(url,body,method,cookie);
+        const {url,body,method,headers} = req.body;
+        const response = await spotifyService.request(url,body,method,headers,cookie);
         res.send(response);
         next();
     }
