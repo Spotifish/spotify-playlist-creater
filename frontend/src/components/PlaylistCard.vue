@@ -17,13 +17,13 @@
 
 <style scoped lang="scss">
   #playlist-card {
+    background: white;
     width: calc(100% - #{($page-margin * 2)});
     display: grid;
     align-items: center;
     justify-content: center;
     grid-template-columns: 1fr 3fr;
     grid-template-rows: 1fr 1fr;
-    background: white;
     margin: $page-margin $page-margin 0;
     padding: 10px;
     border-radius: $border-radius;
@@ -44,7 +44,6 @@
     $tex-size-span: 1.2rem;
 
     span {
-      color: black;
       height: auto;
       text-align: center;
       font-size: $tex-size-span;

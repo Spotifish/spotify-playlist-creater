@@ -14,12 +14,15 @@ import store from "./store"
 // Routes
 import Login from "./pages/Login";
 import LoginCallback from "./pages/LoginCallback";
-import PlaylistCreator from "./pages/PlaylistCreator";
 import Playlists from "./pages/Playlists";
+import WorkflowContainer from "./pages/WorkflowContainer";
 
 const routes = [
-  {path: '/', component: Playlists, name: 'start'},
-  {path: '/playlistCreator', component: PlaylistCreator, name: 'creator'},
+  {
+    path: '/', component: WorkflowContainer, children: [
+      {path: '', component: Playlists, name: 'chooseSource'}
+    ]
+  },
   {path: '/login', component: Login, name: 'login'},
   {path: '/authCallback', component: LoginCallback, name: 'authCallback'}
 ];
