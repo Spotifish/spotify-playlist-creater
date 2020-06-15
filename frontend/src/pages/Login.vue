@@ -10,13 +10,15 @@
 
 <script>
   import repositories from "../data/spotify/repositories";
-  import config from "../../app.config";
 
   export default {
     name: "LoginPage",
     methods: {
       login: async function () {
-        await repositories.authRepository.requestAuthorizationToken(config.spotifyApi.redirectUrl, "/")
+        await repositories.authRepository.requestAuthorizationToken(
+          location.origin + this.$router.resolve({name: "authCallback"}).href,
+          "/"
+        )
       }
     }
   }

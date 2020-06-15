@@ -6,25 +6,18 @@ const config = {
       DEV: "development",
       PROXY: "proxy"
     },
-    // base url of the proxy
-    baseUrl: process.env.VUE_APP_SPOTIFY_API_BASE_URL,
+    baseUrl: "https://api.spotify.com/v1",
     // secrets for development purposes
     secrets: {
       clientId: process.env.VUE_APP_SPOTIFY_API_CLIENT_ID,
       clientSecret: process.env.VUE_APP_SPOTIFY_API_CLIENT_SECRET
     },
-    forceDialog: false,
-    isSaveTokensEnabled: process.env.VUE_APP_SPOTIFY_API_SAVE_TOKENS.toLowerCase() === 'true',
-    redirectUrl: process.env.VUE_APP_SPOTIFY_REDIRECT_URL
-  },
-  baseUrl: process.env.BASE_URL
+    isSaveTokensEnabled: process.env.VUE_APP_SPOTIFY_API_SAVE_TOKENS.toLowerCase() === 'true'
+  }
 }
 
 // validate the config
 // validate root items
-if (config.baseUrl === undefined) {
-  console.error("No root url defined in config!")
-}
 
 // validate spotify api
 const spotifyApi = config.spotifyApi;
@@ -40,14 +33,6 @@ if (spotifyApi.mode === spotifyApi.modes.DEV) {
   if (spotifyApi.secrets.clientSecret === undefined) {
     console.error("No client secret specified in dev mode!")
   }
-}
-
-if (process.env.VUE_APP_SPOTIFY_API_FORCE_DIALOG !== undefined) {
-  spotifyApi.forceDialog = JSON.parse(process.env.VUE_APP_SPOTIFY_API_FORCE_DIALOG.toLowerCase());
-}
-
-if (spotifyApi.redirectUrl === undefined) {
-  console.error("No redirect url specified!")
 }
 
 export default config;

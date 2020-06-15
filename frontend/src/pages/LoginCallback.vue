@@ -16,7 +16,6 @@
 <script>
   import Spinner from "../components/Spinner";
   import repositories from "../data/spotify/repositories";
-  import config from "../../app.config";
 
   export default {
     name: "LoginReturn",
@@ -42,7 +41,9 @@
       }
 
       const authorizationToken = queryParams.code;
-      const authData = await repositories.authRepository.requestAccessToken(config.spotifyApi.redirectUrl, authorizationToken);
+      const authData = await repositories.authRepository.requestAccessToken(
+        location.origin + this.$router.resolve({name: "authCallback"}).href,
+        authorizationToken);
 
       this.$store.commit('setSpotifyAccessToken', {
         accessToken: authData.accessToken,
