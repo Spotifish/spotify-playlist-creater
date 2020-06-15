@@ -17,12 +17,12 @@ html, body {
   box-sizing: border-box;
 }
 
-button {
+@mixin ripple-button($color) {
   border: none;
   font-size: 1.3rem;
   font-weight: bold;
   cursor: pointer;
-  background-color: $color-accent;
+  background-color: $color;
   color: white;
   outline: none;
   background-position: center;
@@ -32,12 +32,16 @@ button {
   @include box_shadow(2);
 
   &:hover {
-    background: lighten($color-accent, 7%) radial-gradient(circle, transparent 1%, lighten($color-accent, 7%) 1%) center/15000%;
+    background: lighten($color, 7%) radial-gradient(circle, transparent 1%, lighten($color, 7%) 1%) center/15000%;
   }
 
   &:active {
-    background-color: lighten($color-accent, 20%);
+    background-color: lighten($color, 20%);
     background-size: 100%;
     transition: background 0s;
   }
+}
+
+button {
+  @include ripple-button($color-accent)
 }
