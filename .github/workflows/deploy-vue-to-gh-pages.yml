@@ -19,6 +19,8 @@ jobs:
           node-version: '12'
       - run: npm install
       - run: npm run build
+        env:
+          VUE_APP_BASE_PATH: /${{ GITHUB_REPOSITORY }}/
       - name: Deploy to pages
         uses: peaceiris/actions-gh-pages@v3
         with:
