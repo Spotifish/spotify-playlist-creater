@@ -15,16 +15,28 @@
   @import "static/sanitize.css";
 
   #app {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     width: 100%;
     height: 100%;
   }
 
-  html {
-    font-size: 16px;
+  * {
+    color: $color-text;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+
+    &:before, &:after {
+      box-sizing: inherit;
+    }
   }
 
-  #app {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
   }
 </style>

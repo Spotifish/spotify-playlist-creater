@@ -4,6 +4,10 @@
     <div id="router-container">
       <router-view></router-view>
     </div>
+    <div id="menu">
+      <em class="material-icons">arrow_back</em>
+      <em class="material-icons">arrow_forward</em>
+    </div>
   </div>
 </template>
 
@@ -31,6 +35,24 @@
     #router-container {
       width: 100%;
       height: calc(100% - 6rem);
+    }
+
+    #menu {
+      width: 100%;
+      background-color: $color-primary;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      @include box_shadow(2);
+
+      em {
+        color: white;
+        width: 50%;
+        text-align: center;
+        padding: 0.5rem 0;
+        @include ripple($color-primary);
+        font-size: 1.8rem;
+      }
     }
   }
 </style>
