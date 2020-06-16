@@ -1,5 +1,5 @@
 <template>
-  <div id="playlist-card" v-bind:class="{ selected: isPlaylistSelected}">
+  <div id="playlist-card" v-bind:class="{ selected: isPlaylistSelected}" v-on:click="onItemSelected(item)">
     <img v-bind:src="item.images[0].url" v-bind:alt="item.name">
     <span id="name">{{item.name}}</span>
     <span id="tracks">{{item.tracks.total}} tracks</span>
