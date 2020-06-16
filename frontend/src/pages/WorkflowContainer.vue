@@ -25,7 +25,7 @@
       height: 6rem;
       width: 100%;
       background: $color-primary;
-      z-index: 100;
+      z-index: 1;
     }
 
     #router-container {

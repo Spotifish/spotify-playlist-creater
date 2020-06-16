@@ -7,8 +7,8 @@
 </template>
 
 <script>
-  import repositories from "../data/spotify/repositories";
-  import PlaylistCard from "../components/PlaylistCard";
+  import repositories from "../../data/spotify/repositories";
+  import PlaylistCard from "../../components/PlaylistCard";
 
   export default {
     name: "Playlists",

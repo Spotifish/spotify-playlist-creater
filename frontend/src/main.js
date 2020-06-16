@@ -14,7 +14,7 @@ import store from "./store"
 // Routes
 import Login from "./pages/Login";
 import LoginCallback from "./pages/LoginCallback";
-import Playlists from "./pages/Playlists";
+import Playlists from "./pages/workflow/Playlists";
 import WorkflowContainer from "./pages/WorkflowContainer";
 
 const routes = [
