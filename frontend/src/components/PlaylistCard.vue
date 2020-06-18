@@ -3,7 +3,7 @@
     <img v-bind:src="item.images[0].url" v-bind:alt="item.name">
     <span id="name">{{item.name}}</span>
     <span id="tracks">{{item.tracks.total}} tracks</span>
-    <button v-on:click.stop="onItemSelected(item)">{{isPlaylistSelected ? "Selected" : "Select"}}</button>
+    <button v-on:click.stop="onItemSelected(item)" v-ripple>{{isPlaylistSelected ? "Selected" : "Select"}}</button>
   </div>
 </template>
 

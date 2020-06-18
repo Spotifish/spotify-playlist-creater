@@ -5,8 +5,8 @@
       <router-view></router-view>
     </div>
     <div id="menu">
-      <em class="material-icons" v-on:click="workflowMoveSteps(-1)" v-bind:class="{ enabled : isBackAllowed }">arrow_back</em>
-      <em class="material-icons" v-on:click="workflowMoveSteps(1)" v-bind:class="{ enabled : isForwardAllowed }">arrow_forward</em>
+      <em class="material-icons" v-on:click="workflowMoveSteps(-1)" v-bind:class="{ enabled : isBackAllowed }" v-ripple>arrow_back</em>
+      <em class="material-icons" v-on:click="workflowMoveSteps(1)" v-bind:class="{ enabled : isForwardAllowed }" v-ripple>arrow_forward</em>
     </div>
   </div>
 </template>
@@ -77,7 +77,6 @@
       @include box_shadow(2);
 
       .enabled {
-        @include ripple($color-primary);
         color: white;
       }
 

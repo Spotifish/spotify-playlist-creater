@@ -6,6 +6,8 @@ import App from './App.vue'
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 
+import Ripple from "vue-ripple-directive";
+Vue.directive('ripple', Ripple);
 
 // Store
 import store from "./store"
