@@ -64,7 +64,8 @@
 
     #router-container {
       width: 100%;
-      height: calc(100% - 6rem);
+      flex-grow: 1;
+      height: 0;
     }
 
     #menu {
