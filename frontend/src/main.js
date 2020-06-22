@@ -9,6 +9,9 @@ Vue.use(VueRouter)
 import Ripple from "vue-ripple-directive";
 Vue.directive('ripple', Ripple);
 
+import VShowSlide from "v-show-slide";
+Vue.use(VShowSlide);
+
 // Store
 import store from "./store"
 

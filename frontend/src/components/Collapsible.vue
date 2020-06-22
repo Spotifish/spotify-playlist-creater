@@ -5,7 +5,7 @@
       <em v-if="isCollapsed" class="material-icons">expand_more</em>
       <em v-else class="material-icons">expand_less</em>
     </div>
-    <div id="content" v-bind:class="{ collapsed : isCollapsed }">
+    <div id="content" v-show-slide="!isCollapsed">
       <slot></slot>
     </div>
   </div>
@@ -47,12 +47,6 @@
 
     #content {
       @include box_shadow(1);
-
-      &.collapsed {
-        height: 0;
-      }
-
-      overflow: hidden;
     }
   }
 </style>
