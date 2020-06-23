@@ -1,6 +1,6 @@
 <template>
-  <div id="collapsible" v-on:click="isCollapsed = !isCollapsed">
-    <div id="bar" v-ripple>
+  <div id="collapsible">
+    <div id="bar" v-ripple v-on:click="isCollapsed = !isCollapsed">
       <span>{{title}}</span>
       <em v-if="isCollapsed" class="material-icons">expand_more</em>
       <em v-else class="material-icons">expand_less</em>

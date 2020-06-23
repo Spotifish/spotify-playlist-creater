@@ -1,18 +1,27 @@
 <template>
   <div id="analysis">
-    <Collapsible title="Trend" v-for="n in 20" v-bind:key="n">
-      <h1>Hallo {{n}}</h1>
+    <Collapsible title="Features">
+      <features></features>
     </Collapsible>
   </div>
 </template>
 
 <script>
   import Collapsible from "../../components/Collapsible";
+  import Features from "../../components/analysis/Features";
+  import {STEP_NAMES} from "../../store/steps";
 
   export default {
     name: "Analysis",
     components: {
-      Collapsible
+      Collapsible,
+      Features
+    },
+    beforeCreate() {
+      // if no playlist selected, go a step back
+      if (!this.$store.getters.isAnyPlaylistSelected) {
+        this.$router.push({name: STEP_NAMES[0]})
+      }
     }
   }
 </script>

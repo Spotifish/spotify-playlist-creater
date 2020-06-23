@@ -15,7 +15,7 @@
     },
     methods: {
       onItemSelected: function (item) {
-        this.$store.commit("changeSelectPlaylistState", item);
+        this.$store.dispatch("changeSelectPlaylistState", item);
       }
     },
     computed: {
