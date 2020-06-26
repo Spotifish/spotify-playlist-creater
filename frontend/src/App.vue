@@ -39,4 +39,8 @@
     overflow: hidden;
     box-sizing: border-box;
   }
+
+  button {
+    @include ripple-button($color-accent)
+  }
 </style>

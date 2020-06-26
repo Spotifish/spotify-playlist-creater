@@ -1,6 +1,8 @@
 <template>
   <div id="workflow-container">
-    <div id="progress">stepper progress bar</div>
+    <div id="progress">
+      <h1>Spoti.fish</h1>
+    </div>
     <div id="router-container">
       <router-view></router-view>
     </div>
@@ -56,10 +58,14 @@
 
     #progress {
       @include box_shadow(2);
-      height: 6rem;
       width: 100%;
       background: $color-primary;
-      z-index: 1;
+
+      h1 {
+        color: white;
+        width: 100%;
+        text-align: center;
+      }
     }
 
     #router-container {
