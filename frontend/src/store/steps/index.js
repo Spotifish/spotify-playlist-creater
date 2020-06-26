@@ -1,3 +1,4 @@
+// TODO this should be a map of name -> validator. All logic concerning step validation should live here.
 const STEP_NAMES = [
   'CHOOSE_SOURCE',
   'ANALYSIS'
