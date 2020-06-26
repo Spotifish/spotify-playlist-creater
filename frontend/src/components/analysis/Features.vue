@@ -7,6 +7,9 @@
 <script>
   export default {
     name: "Features",
+    props: {
+      series: Array
+    },
     data: function () {
       return {
         chartOptions: {
@@ -27,17 +30,7 @@
           xaxis: {
             categories: ['Danceability', 'Mood']
           }
-        },
-        series: [
-          {
-            name: 'Danceability',
-            data: [30]
-          },
-          {
-            name: 'Mood',
-            data: [40]
-          }
-        ]
+        }
       }
     },
     async beforeMount() {

@@ -1,7 +1,7 @@
 <template>
   <div id="analysis">
     <Collapsible title="Features">
-      <features></features>
+      <features :series="featuresSeries"></features>
     </Collapsible>
   </div>
 </template>
@@ -21,6 +21,20 @@
       // if no playlist selected, go a step back
       if (!this.$store.getters.isAnyPlaylistSelected) {
         this.$router.push({name: STEP_NAMES[0]})
+      }
+    },
+    computed: {
+      featuresSeries: function () {
+        return [
+          {
+            name: 'Danceability',
+            data: [30]
+          },
+          {
+            name: 'Mood',
+            data: [40]
+          }
+        ]
       }
     }
   }
