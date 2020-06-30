@@ -8,11 +8,11 @@
   export default {
     name: "Features",
     props: {
-      series: Array
+      features: Object
     },
-    data: function () {
-      return {
-        chartOptions: {
+    computed: {
+      chartOptions: function () {
+        return {
           chart: {
             id: 'features-chart',
             toolbar: {
@@ -28,9 +28,20 @@
             }
           },
           xaxis: {
-            categories: ['Danceability', 'Mood']
+            categories: Object.keys(this.features)
+          },
+          yaxis: {
+            logarithmic: false
           }
         }
+      },
+      series: function () {
+        return [
+          {
+            name: "",
+            data: Object.values(this.features).map(value => value.toFixed(2))
+          }
+        ]
       }
     },
     async beforeMount() {

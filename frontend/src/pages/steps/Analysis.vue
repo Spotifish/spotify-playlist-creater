@@ -1,14 +1,14 @@
 <template>
   <div id="analysis">
     <Collapsible title="Features">
-      <features :series="featuresSeries"></features>
+      <features :features="$store.getters.getAverageFeatures"></features>
     </Collapsible>
   </div>
 </template>
 
 <script>
   import Collapsible from "../../components/Collapsible";
-  import Features from "../../components/analysis/Features";
+  import Features from "../../components/charts/Features";
   import {STEP_NAMES} from "../../store/steps";
 
   export default {
@@ -21,20 +21,6 @@
       // if no playlist selected, go a step back
       if (!this.$store.getters.isAnyPlaylistSelected) {
         this.$router.push({name: STEP_NAMES[0]})
-      }
-    },
-    computed: {
-      featuresSeries: function () {
-        return [
-          {
-            name: 'Danceability',
-            data: [30]
-          },
-          {
-            name: 'Mood',
-            data: [40]
-          }
-        ]
       }
     }
   }

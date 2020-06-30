@@ -46,7 +46,7 @@ export default {
       ];
 
       if (getters.getAudioFeatures.length === 0) {
-        return [];
+        return {};
       }
 
       // reduce to sum
