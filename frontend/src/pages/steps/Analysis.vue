@@ -1,7 +1,7 @@
 <template>
   <div id="analysis">
     <Collapsible title="Features">
-      <features :features="$store.getters.getAverageFeatures"></features>
+      <features :features="features"></features>
     </Collapsible>
   </div>
 </template>
@@ -16,6 +16,15 @@
     components: {
       Collapsible,
       Features
+    },
+    computed: {
+      features: function () {
+        const removeFeatures = ["loudness", "tempo"];
+        return Object.fromEntries(Object.entries(this.$store.getters.getAverageFeatures)
+          .filter(([key]) => !removeFeatures.includes(key))
+          .map(([key, value]) => [key.charAt(0).toUpperCase() + key.slice(1), value])
+        );
+      }
     },
     beforeCreate() {
       // if no playlist selected, go a step back
