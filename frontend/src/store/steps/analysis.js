@@ -24,11 +24,13 @@ export default {
       if (state.audioFeatures !== undefined && state.audioFeatures['audio_features'] !== undefined) {
         return state.audioFeatures['audio_features'];
       } else {
-        console.log(state.audioFeatures);
         return [];
       }
     },
-    getTracks: state => state.tracks.flatMap(result => result.items),
+    getTracks: state => {
+      if (state.tracks === undefined) return [];
+      return state.tracks.flatMap(result => result.items)
+    },
     /**
      * Returns the features of the tracks in an object mapping feature to value.
      */

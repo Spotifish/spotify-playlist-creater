@@ -1,6 +1,6 @@
 <template>
   <div id="features">
-    <apexchart type="bar" width="100%" :options="chartOptions" :series="series"></apexchart>
+    <apexchart ref="chart" type="bar" width="100%" :options="chartOptions" :series="series"></apexchart>
   </div>
 </template>
 
@@ -38,7 +38,10 @@
             enabled: false
           },
           xaxis: {
-            categories: Object.keys(this.features)
+            categories: Object.keys(this.features),
+            title: {
+              text: "Average Confidence"
+            }
           },
           yaxis: {
             logarithmic: false,
@@ -50,7 +53,6 @@
       series: function () {
         return [
           {
-            name: "",
             data: Object.values(this.features).map(value => value.toFixed(2))
           }
         ]

@@ -1,7 +1,10 @@
 <template>
   <div id="analysis">
-    <Collapsible title="Features">
+    <Collapsible title="Average Features" :collapsed="true">
       <features :features="features"></features>
+    </Collapsible>
+    <Collapsible title="Features by Track">
+      <features-track-list feature="valence" :track-features="featuresByTrack"/>
     </Collapsible>
   </div>
 </template>
@@ -9,21 +12,43 @@
 <script>
   import Collapsible from "../../components/Collapsible";
   import Features from "../../components/analysis/Features";
+  import FeaturesTrackList from "../../components/analysis/FeaturesTrackList";
+
   import {STEP_NAMES} from "../../store/steps";
+  import {mapGetters} from "vuex"
 
   export default {
     name: "Analysis",
     components: {
       Collapsible,
-      Features
+      Features,
+      FeaturesTrackList
     },
     computed: {
+      ...mapGetters([
+        "getAverageFeatures",
+        "getAudioFeatures",
+        "getTracks",
+        "isAnyPlaylistSelected"
+      ]),
       features: function () {
         const removeFeatures = ["loudness", "tempo"];
-        return Object.fromEntries(Object.entries(this.$store.getters.getAverageFeatures)
+        return Object.fromEntries(Object.entries(this.getAverageFeatures)
           .filter(([key]) => !removeFeatures.includes(key))
           .map(([key, value]) => [key.charAt(0).toUpperCase() + key.slice(1), value])
         );
+      },
+      featuresByTrack: function () {
+        if (this.getTracks.length === this.getAudioFeatures.length) {
+          return this.getTracks.map((track, index) => {
+            return {
+              track,
+              features: this.getAudioFeatures[index]
+            }
+          })
+        } else {
+          return []
+        }
       }
     },
     beforeCreate() {
@@ -50,8 +75,8 @@
       padding-bottom: $page-margin;
     }
 
-    div {
-      padding-bottom: 5px;
+    & > div {
+      padding-bottom: $page-margin / 2;
     }
   }
 </style>

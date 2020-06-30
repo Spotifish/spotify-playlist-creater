@@ -14,12 +14,21 @@
 <script>
   export default {
     name: "Collapsible",
-    data: function () {
+    data: function() {
       return {
-        isCollapsed: true
+        isCollapsed: undefined
       }
     },
-    props: ['title']
+    created() {
+      this.isCollapsed = this.collapsed
+    },
+    props: {
+      "title": String,
+      "collapsed": {
+        type: Boolean,
+        default: true
+      }
+    }
   }
 </script>
 
