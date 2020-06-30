@@ -8,7 +8,7 @@
 
 <script>
   import Collapsible from "../../components/Collapsible";
-  import Features from "../../components/charts/Features";
+  import Features from "../../components/analysis/Features";
   import {STEP_NAMES} from "../../store/steps";
 
   export default {
