@@ -27,11 +27,23 @@
               horizontal: true
             }
           },
+          states: {
+            hover: {
+              filter: {
+                type: 'none',
+              }
+            },
+          },
+          tooltip: {
+            enabled: false
+          },
           xaxis: {
             categories: Object.keys(this.features)
           },
           yaxis: {
-            logarithmic: false
+            logarithmic: false,
+            min: 0,
+            max: 1
           }
         }
       },
