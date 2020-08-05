@@ -4,7 +4,7 @@ const config = {
     secrets: {
       clientId: process.env.VUE_APP_SPOTIFY_API_CLIENT_ID
     },
-    isSaveTokensEnabled: process.env.VUE_APP_SPOTIFY_API_SAVE_TOKENS.toLowerCase() === 'true'
+    isSaveTokensEnabled: process.env.VUE_APP_SPOTIFY_API_SAVE_TOKENS && process.env.VUE_APP_SPOTIFY_API_SAVE_TOKENS.toLowerCase() === 'true'
   }
 }
 
