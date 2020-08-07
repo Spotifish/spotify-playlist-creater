@@ -1,8 +1,6 @@
 <template>
   <div id="playlists">
-    <ul>
-      <PlaylistCard v-for="item in playlistItems" v-bind:key="item.id" :item="item"></PlaylistCard>
-    </ul>
+    <PlaylistCard v-for="item in playlistItems" v-bind:key="item.id" :item="item"></PlaylistCard>
   </div>
 </template>
 
@@ -33,14 +31,22 @@
   #playlists {
     width: 100%;
     height: 100%;
+    display: grid;
+    padding: 1rem;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    overflow-y: scroll;
 
-    ul {
-      width: 100%;
-      height: 100%;
-      overflow-y: scroll;
-      overflow-x: hidden;
-      display: flex;
-      flex-direction: column;
+    @media (min-width: 1000px) {
+      grid-template-columns: repeat(3, minmax(230px, 1fr))
+    }
+
+    div {
+      min-height: 150px;
+    }
+
+    & > :last-child {
+      margin-bottom: 1rem;
     }
   }
 </style>

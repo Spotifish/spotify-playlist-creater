@@ -1,6 +1,6 @@
 <template>
   <div id="playlist-card" v-bind:class="{ selected: isPlaylistSelected}" v-on:click="onItemSelected(item)">
-    <img v-bind:src="item.images[0].url" v-bind:alt="item.name">
+    <div v-bind:style="{ backgroundImage: 'url(' + item.images[0].url + ')' }"></div>
     <span id="name">{{item.name}}</span>
     <span id="tracks">{{item.tracks.total}} tracks</span>
     <button v-on:click.stop="onItemSelected(item)" v-ripple>{{isPlaylistSelected ? "Selected" : "Select"}}</button>
@@ -28,22 +28,19 @@
 
 <style scoped lang="scss">
   #playlist-card {
+    width: 100%;
+    height: 100%;
     background: white;
-    width: calc(100% - #{($page-margin * 2)});
     display: grid;
     align-items: center;
     justify-content: center;
-    grid-template-columns: minmax(50px, 25%) 1fr;
-    margin: $page-margin $page-margin 0;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 1fr min-content;
     border-radius: $border-radius;
     @include box_shadow(2);
 
     &.selected {
       background-color: $color-primary-light;
-    }
-
-    &:last-child {
-      margin-bottom: $page-margin;
     }
 
     button {
@@ -56,33 +53,35 @@
       height: 100%;
     }
 
-    img {
+    div {
+      height: 100%;
       width: 100%;
-      grid-column: 1 / 1;
+      grid-column: 1 / 2;
       grid-row: 1 / 3;
-      border-radius: $border-radius $border-radius 0 0;
+      border-radius: $border-radius 0 0 0;
+      background-size: cover;
     }
 
     $text-size-span: 1.1rem;
 
     span {
-      height: auto;
+      width: 100%;
       text-align: center;
       font-size: $text-size-span;
-      line-height: ($text-size-span + 0.05rem);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      height: auto;
     }
 
     span#name {
-      grid-column: 2 / 2;
-      grid-row: 1 / 1;
+      grid-column: 2 / 3;
+      grid-row: 1 / 2;
     }
 
     span#tracks {
-      grid-column: 2 / 2;
-      grid-row: 2 / 2;
+      grid-column: 2 / 3;
+      grid-row: 2 / 3;
     }
   }
 </style>
