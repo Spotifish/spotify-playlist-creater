@@ -33,7 +33,7 @@
     display: grid;
     align-items: center;
     justify-content: center;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: minmax(50px, 25%) 1fr;
     margin: $page-margin $page-margin 0;
     border-radius: $border-radius;
     @include box_shadow(2);
@@ -57,19 +57,19 @@
     }
 
     img {
-      height: 8rem;
+      width: 100%;
       grid-column: 1 / 1;
       grid-row: 1 / 3;
       border-radius: $border-radius $border-radius 0 0;
     }
 
-    $tex-size-span: 1.2rem;
+    $text-size-span: 1.1rem;
 
     span {
       height: auto;
       text-align: center;
-      font-size: $tex-size-span;
-      line-height: ($tex-size-span + 0.05rem);
+      font-size: $text-size-span;
+      line-height: ($text-size-span + 0.05rem);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
