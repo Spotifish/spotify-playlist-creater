@@ -8,5 +8,8 @@ module.exports = {
       }
     }
   },
+  configureWebpack: {
+    devtool: 'source-map'
+  },
   publicPath: process.env.VUE_APP_BASE_PATH !== undefined ? process.env.VUE_APP_BASE_PATH : "/"
 };
