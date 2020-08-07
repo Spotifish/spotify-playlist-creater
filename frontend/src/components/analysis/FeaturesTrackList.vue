@@ -122,10 +122,17 @@ export default {
   }
 
   &::v-deep .multiselect {
+    overflow: visible;
+
     .multiselect__single {
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
+    }
+
+    .multiselect__content {
+      position: relative;
+      overflow: auto;
     }
 
     .multiselect__option--selected {

@@ -1,11 +1,17 @@
 <template>
   <div id="collapsible">
     <div id="bar" v-ripple v-on:click="isCollapsed = !isCollapsed">
-      <span>{{title}}</span>
+      <span>{{ title }}</span>
       <em v-if="isCollapsed" class="material-icons">expand_more</em>
       <em v-else class="material-icons">expand_less</em>
     </div>
-    <div id="content" v-show-slide="!isCollapsed">
+    <div id="content"
+         v-show-slide="!isCollapsed"
+         :class="{ 'allow-overflow': !isSliding }"
+         @slide-open-start="slideOpenStart"
+         @slide-open-end="slideOpenEnd"
+         @slide-close-start="slideCloseStart"
+         @slide-close-end="slideCloseEnd">
       <slot></slot>
     </div>
   </div>
@@ -14,9 +20,10 @@
 <script>
   export default {
     name: "Collapsible",
-    data: function() {
+    data: function () {
       return {
-        isCollapsed: undefined
+        isCollapsed: undefined,
+        isSliding: false
       }
     },
     created() {
@@ -28,6 +35,20 @@
         type: Boolean,
         default: true
       }
+    },
+    methods: {
+      slideOpenStart() {
+        this.isSliding = true;
+      },
+      slideOpenEnd() {
+        this.isSliding = false;
+      },
+      slideCloseStart() {
+        this.isSliding = true;
+      },
+      slideCloseEnd() {
+        this.isSliding = false;
+      },
     }
   }
 </script>
@@ -56,6 +77,10 @@
 
     #content {
       @include box_shadow(1);
+    }
+
+    .allow-overflow {
+      overflow: visible !important;
     }
   }
 </style>
