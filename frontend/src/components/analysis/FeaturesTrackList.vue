@@ -1,57 +1,142 @@
 <template>
   <div id="features-list">
-    <div id="item" v-for="item in list" :key="item.name">
-      <span id="track-name">{{item.name}}</span>
-      <span id="feature-value">{{item.value}}</span>
-    </div>
+    <table>
+      <colgroup>
+        <col span="1">
+        <col span="1">
+      </colgroup>
+
+      <thead>
+      <tr>
+        <th>Track</th>
+        <th id="select">
+          <Multiselect
+              v-model="selectedFeature"
+              :options="features"
+              :show-labels="false"
+              :searchable="false"
+              :allow-empty="false">
+          </Multiselect>
+        </th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr v-for="item in list" :key="item.name">
+        <td id="track-name">{{ item.name }}</td>
+        <td id="feature-value">{{ item.value.toFixed(2) }}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
 <script>
-  export default {
-    name: "FeaturesTrackList",
-    props: {
-      trackFeatures: Array,
-      feature: {
-        type: String,
-        required: true
+import {mapGetters} from "vuex";
+import Multiselect from "vue-multiselect"
+
+export default {
+  name: "FeaturesTrackList",
+  components: {
+    Multiselect
+  },
+  data: function () {
+    return {
+      features: [
+        "acousticness",
+        "danceability",
+        "energy",
+        "instrumentalness",
+        "liveness",
+        "loudness",
+        "speechiness",
+        "valence",
+        "tempo"
+      ],
+      selectedFeature: "speechiness"
+    }
+  },
+  computed: {
+    ...mapGetters([
+      "getAudioFeatures",
+      "getTracks"
+    ]),
+    trackFeatures: function () {
+      if (this.getTracks.length === this.getAudioFeatures.length) {
+        return this.getTracks.map((track, index) => {
+          return {
+            track,
+            features: this.getAudioFeatures[index]
+          }
+        })
+      } else {
+        return []
       }
     },
-    computed: {
-      list: function () {
-        return this.trackFeatures
+    list: function () {
+      return this.trackFeatures
           .map(o => {
             return {
               name: o.track.track.name,
-              value: o.features[this.feature]
+              value: o.features[this.selectedFeature]
             }
           })
-        .sort((a, b) => b.value - a.value)
-      }
+          .sort((a, b) => b.value - a.value)
     }
   }
+}
 </script>
 
 <style scoped lang="scss">
-  #features-list {
-    #item {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 16px;
-      border-bottom: $color-divider solid 1px;
+#features-list {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
 
-      #track-name {
-        flex-grow: 1;
-        font-size: 0.95rem;
-      }
+  tr {
+    &:nth-of-type(odd) {
+      background: $color-primary-light;
+    }
 
-      #feature-value {
-        font-family: monospace;
-        text-align: end;
-        min-width: 8ch;
-        width: 8ch;
-      }
+    td:nth-of-type(2) {
+      border-left: 1px solid $color-divider;
     }
   }
+
+  th {
+    background: $color-primary-dark;
+    color: white;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+  td, th {
+    padding: 6px;
+    text-align: left;
+  }
+
+  col:nth-of-type(2) {
+    width: 30%;
+  }
+
+  &::v-deep .multiselect {
+    .multiselect__single {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .multiselect__option--selected {
+      background: $color-accent;
+      color: white;
+    }
+
+    .multiselect__option--highlight {
+      background: $color-primary-light;
+      color: black;
+    }
+  }
+}
 </style>

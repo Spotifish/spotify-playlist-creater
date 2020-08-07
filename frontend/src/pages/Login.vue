@@ -3,13 +3,13 @@
     <div id="container">
       <h1>Spoti.fish</h1>
       <img id="logo" src="https://placeholder.pics/svg/300" alt="Spoti.fish Icon">
-      <button id="btn-login" v-on:click="login">Login with Spotify</button>
+      <button v-on:click="login">Login with Spotify</button>
     </div>
   </div>
 </template>
 
 <script>
-  import repositories from "../data/spotify/repositories";
+  import repositories from "@/data/spotify/repositories";
 
   export default {
     name: "LoginPage",
@@ -43,6 +43,7 @@
       max-width: 500px;
 
       button {
+        @include ripple-button($color-accent);
         font-size: 2rem;
         height: 3.5rem;
         border-radius: 10px;
