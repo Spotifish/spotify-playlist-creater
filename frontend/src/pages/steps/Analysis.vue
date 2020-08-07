@@ -1,11 +1,13 @@
 <template>
-  <div id="analysis">
-    <Collapsible title="Average Features" :collapsed="true">
-      <features :features="features"></features>
-    </Collapsible>
-    <Collapsible title="Features by Track">
-      <features-track-list feature="valence"/>
-    </Collapsible>
+  <div id="container">
+    <div id="analysis">
+      <Collapsible title="Average Features" :collapsed="true">
+        <features :features="features"></features>
+      </Collapsible>
+      <Collapsible title="Features by Track">
+        <features-track-list feature="valence"/>
+      </Collapsible>
+    </div>
   </div>
 </template>
 
@@ -47,11 +49,19 @@
 </script>
 
 <style scoped lang="scss">
-  #analysis {
-    padding: 0 $page-margin;
+  #container {
     width: 100%;
     height: 100%;
+    padding: 0 $page-margin;
     overflow-y: scroll;
+    display: grid;
+    place-items: start center;
+  }
+
+  #analysis {
+    height: 100%;
+    width: 100%;
+    max-width: 1000px;
 
     &:first-child {
       padding-top: $page-margin;

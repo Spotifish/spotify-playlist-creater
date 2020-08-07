@@ -7,7 +7,7 @@
     </div>
     <div id="content"
          v-show-slide="!isCollapsed"
-         :class="{ 'allow-overflow': !isSliding }"
+         :class="{ 'allow-overflow': allowOverflow }"
          @slide-open-start="slideOpenStart"
          @slide-open-end="slideOpenEnd"
          @slide-close-start="slideCloseStart"
@@ -23,7 +23,7 @@
     data: function () {
       return {
         isCollapsed: undefined,
-        isSliding: false
+        allowOverflow: true
       }
     },
     created() {
@@ -38,16 +38,16 @@
     },
     methods: {
       slideOpenStart() {
-        this.isSliding = true;
+        this.allowOverflow = false;
       },
       slideOpenEnd() {
-        this.isSliding = false;
+        this.allowOverflow = true;
       },
       slideCloseStart() {
-        this.isSliding = true;
+        this.allowOverflow = false;
       },
       slideCloseEnd() {
-        this.isSliding = false;
+        this.allowOverflow = false;
       },
     }
   }
