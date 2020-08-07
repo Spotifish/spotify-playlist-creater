@@ -65,6 +65,7 @@
         color: white;
         width: 100%;
         text-align: center;
+        margin: .6rem 0;
       }
     }
 
