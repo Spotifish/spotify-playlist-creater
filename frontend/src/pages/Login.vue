@@ -2,7 +2,7 @@
   <div id="login-page">
     <div id="container">
       <h1>Spoti.fish</h1>
-      <img id="logo" src="https://placeholder.pics/svg/300" alt="Spoti.fish Icon">
+      <img id="logo" src="../assets/spotifish.svg" alt="Spoti.fish Icon">
       <button v-on:click="login">Login with Spotify</button>
     </div>
   </div>
