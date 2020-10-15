@@ -12,7 +12,11 @@ export default async (url, params) => {
     params.headers = {};
   }
   params.headers['Authorization'] = "Bearer " + store.getters.spotifyAccessToken;
-  const response = await fetch(config.spotifyApi.baseUrl + url, params)
+
+  store.commit("startLoading");
+  const response = await fetch(config.spotifyApi.baseUrl + url, params);
+  store.commit("finishLoading");
+
   if (response.status === 401) {
     store.commit("invalidateSpotifyAccessToken");
 

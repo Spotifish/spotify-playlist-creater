@@ -1,9 +1,10 @@
 <template>
   <div id="workflow-container">
-    <div id="progress">
+    <div id="header">
       <h1>Spoti.fish</h1>
     </div>
-    <div id="router-container">
+    <ProgressIndefinite :is-active="isLoading"></ProgressIndefinite>
+    <div id="router-container" v-bind:style="{ visibility: isLoading ? 'hidden' : 'visible' }">
       <router-view></router-view>
     </div>
     <div id="menu">
@@ -14,11 +15,19 @@
 </template>
 
 <script>
-  import {STEP_NAMES} from "../store/steps"
+  import {STEP_NAMES} from "@/store/steps"
+  import ProgressIndefinite from "@/components/ProgressIndefinite";
+  import {mapGetters} from "vuex";
 
   export default {
     name: "WorkflowContainer",
+    components: {
+      ProgressIndefinite
+    },
     computed: {
+      ...mapGetters([
+        "isLoading"
+      ]),
       isBackAllowed: function () {
         return STEP_NAMES.indexOf(this.$store.state.route.name) > 0;
       },
@@ -56,7 +65,7 @@
     display: flex;
     flex-direction: column;
 
-    #progress {
+    #header {
       @include box_shadow(2);
       width: 100%;
       background: $color-primary;
